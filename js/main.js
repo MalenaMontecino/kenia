@@ -9,6 +9,7 @@ let juegoEnCurso = true;
 let funciona = false;
 let randomX;
 let randomY;
+const imagenPersonaje = document.getElementById('imagenPersonaje');
 
 crearMapa();
 
@@ -20,6 +21,7 @@ movimientoPersonaje();
 
 
 function actualizarVidas() {
+  imagenPersonaje.src = "/images/personaje/personajeDetras.gif";
   for (let i = 1; i <= 3; i++) {
     const heart = document.getElementById(`heart${i}`);
     if (i <= vidas) {
@@ -112,6 +114,10 @@ function generarPosicionRandomObjetos(){
  return {randomX, randomY}
 }
 
+//funcion para hacer aparecer los objetos en sitios random
+//funcion para comprobar que estan dentro de la array / si no volver a generar
+//funcion para la colision con los objetos
+
 function spawnObjetos(){
   const imagenPalo = document.getElementById('imagenPalo');
   const imagenPiedra = document.getElementById('imagenPiedra');
@@ -126,11 +132,11 @@ function spawnObjetos(){
 }
 
 
+
 function movimientoPersonaje() {
   document.addEventListener('keydown', (event) => {
     if (juegoEnCurso) {
-      const imagenPersonaje = document.getElementById('imagenPersonaje');
-
+    
       // Detener el intervalo anterior antes de comenzar uno nuevo
       clearInterval(intervalId);
 

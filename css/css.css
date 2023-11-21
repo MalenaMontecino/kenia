@@ -32,11 +32,16 @@ body {
 #objetos {
   position: absolute;
   align-items: center;
-  left: 12%;
-  top: 40%;
+ 
   z-index: 2;
 }
 
+#inventario {
+  position: absolute;
+  align-items: center;
+ top: 0%;
+  z-index: 2;
+}
 #personaje {
   width: 40px;
   height: 40px;
