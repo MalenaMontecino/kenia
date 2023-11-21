@@ -1,0 +1,120 @@
+Quiero que se generen los tres objetos (palo, piedra y placasolar) en sitios random pero dentro del camino, entonces quiero que genere una posición random para un objeto y que en la funcion comprobarPersonajeDentroCamino me compruebe que esta dentro del camino, si no lo está que vuelva a generar otra posición hasta que esté dentro.
+
+JS:
+función spawn de objetos:
+function spawnObjetos(){
+  const imagenPalo = document.getElementById('imagenPalo');
+  const imagenPiedra = document.getElementById('imagenPiedra');
+  const imagenPlacasolar = document.getElementById('imagenPlacasolar');
+
+  imagenPalo.src= "/images/objetos/paloPixelart.png";
+  imagenPiedra.src= "/images/objetos/piedraPixelart.png";
+  imagenPlacasolar.src= "/images/objetos/placaSolar.png";
+  
+}
+
+
+función comprobar que esta dentro del camino:
+
+
+function comprobarPersonajeDentroCamino() {
+  const personajeWidth = personaje.offsetWidth;
+  const personajeHeight = personaje.offsetHeight;
+  const leftTop = leftPos;
+  const leftBottom = topPos;
+  const rightTop = leftPos + personajeWidth;
+  const rightBottom = topPos + personajeHeight;
+
+  //1
+  const topLeftColumn = Math.floor((leftTop - 10) / 100);
+  const topLeftRow = Math.floor((leftBottom - 10) / 80);
+  // //2
+  const topRightColumn = Math.floor((rightTop) / 100);
+  const topRightRow = Math.floor((leftBottom - 10) / 80);
+  // //3
+  const bottomLeftColumn = Math.floor((leftTop - 10) / 100); //lado
+  const bottomLeftRow = Math.floor((rightBottom - 10) / 80); //abajo
+  // //4
+  const bottomRightColumn = Math.floor((rightTop - 10) / 100);
+  const bottomRightRow = Math.floor((rightBottom - 10) / 80);
+
+  //blocked si es la posición 0
+  const topLeftIsBlocked = arrayCamino[topLeftRow][topLeftColumn] === 0;
+  const topRightIsBlocked = arrayCamino[topRightRow][topRightColumn] === 0;
+  const bottomLeftIsBlocked = arrayCamino[bottomLeftRow][bottomLeftColumn] === 0;
+  const bottomRightIsBlocked = arrayCamino[bottomRightRow][bottomRightColumn] === 0;
+
+  if (topLeftIsBlocked || topRightIsBlocked || bottomLeftIsBlocked || bottomRightIsBlocked) {
+    clearInterval(intervalId);
+    //actualiza las vidas
+    vidas = vidas - 1;
+    actualizarVidas();
+    inicioMovimientoAutomatico();
+
+    //restablece la posición
+    leftPos = 630;
+    topPos = 600;
+    actualizarPosicionPersonaje();
+
+  }
+
+  // printea posición del personaje EN LA ARRAY
+  document.getElementById('cuadrante').innerHTML =
+    "cuadrante 1= [" + topLeftColumn + ", " + topLeftRow + "]    cuadrante 2= [" + topRightColumn + ", " + topRightRow + "]    cuadrante 3= [" + bottomLeftColumn + ", " + bottomLeftRow + "]    cuadrante 4= [" + bottomRightColumn + ", " + bottomRightRow + "]";
+}
+
+HTML:
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mini juego Kenia</title>
+  <link rel="stylesheet" href="/css/css.css">
+</head>
+
+<body>
+  <div id="game">
+    <div id="objetos">
+      <!-- 
+      <img src="/images/objetos/paloPixelart.png" id="imagenPalo">
+      <img src="/images/objetos/piedraPixelart.png" id="imagenPiedra">
+      <img src="/images/objetos/placaSolar.png" id="imagenPlacasolar"> 
+    -->
+    </div>
+    <div id="personaje">
+      <img src="/images/personaje/personajeDetras.gif" id="imagenPersonaje">
+    </div>
+    <div id="posicion"> </div>
+    <div id="cuadrante"></div>
+    <div id="vidas">
+      <img src="/images/corazones/corazonPixel-entero.png" id="heart1" class="heart">
+      <img src="/images/corazones/corazonPixel-entero.png" id="heart2" class="heart">
+      <img src="/images/corazones/corazonPixel-entero.png" id="heart3" class="heart">
+    </div>
+    
+    <div id="popup" class="popup">
+      <div id="popupContent" class="popup-content">
+        <!-- Contenido del pop-up -->
+        <div id="ganar">
+          <p>¡Ganaste!</p>
+          <button data-action="volver">Volver a jugar</button>
+        </div>
+
+        <div id="perder">
+          <p>¡Perdiste! <br> Te has quedado sin vidas :c</p>
+          <button data-action="reiniciar">Reiniciar</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src="/js/main.js"></script>
+</body>
+
+</html>
+
+
+
