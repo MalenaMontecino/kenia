@@ -105,94 +105,25 @@ function movimiento(direction, step) {
   }, 50); //PONER A 50 LUEGO
 }
 
-// function generarPosicionRandomObjetos(){
-//  randomX = Math.floor((Math.random() * 800));
-//  randomY = Math.floor((Math.random() * 640));
-// }
+function generarPosicionRandomObjetos(){
+ randomX = Math.floor((Math.random() * 800));
+ randomY = Math.floor((Math.random() * 640));
 
-// function spawnObjetos(){
-//   const imagenPalo = document.getElementById('imagenPalo');
-//   const imagenPiedra = document.getElementById('imagenPiedra');
-//   const imagenPlacasolar = document.getElementById('imagenPlacasolar');
-
-//   imagenPalo.src= "/images/objetos/paloPixelart.png";
-//   imagenPiedra.src= "/images/objetos/piedraPixelart.png";
-//   imagenPlacasolar.src= "/images/objetos/placaSolar.png";
-
-//   // Generar la posición random
-//   randomX = Math.floor((Math.random() * 800));
-//  randomY = Math.floor((Math.random() * 640));
-
-
-//   imagenPalo.style.top = randomY;
-//   imagenPalo.style.left = randomX;
-
-
-
-
-// }
-
-// Función para generar una posición aleatoria dentro del camino
-function generarPosicionAleatoriaEnCamino() {
-  const fila = Math.floor(Math.random() * arrayCamino.length);
-  const columna = Math.floor(Math.random() * arrayCamino[0].length);
-  const ObjetoPosX = columna * 100;  // Ancho de cada celda
-  const ObjetoPosY = fila * 80;     // Altura de cada celda
-
-  return { ObjetoPosX, ObjetoPosY };
+ return {randomX, randomY}
 }
 
-// Función para spawnear los objetos en posiciones aleatorias dentro del camino
-function spawnObjetos() {
+function spawnObjetos(){
   const imagenPalo = document.getElementById('imagenPalo');
   const imagenPiedra = document.getElementById('imagenPiedra');
   const imagenPlacasolar = document.getElementById('imagenPlacasolar');
 
-  // Generar posiciones aleatorias dentro del camino para cada objeto
-  const posicionPalo = generarPosicionAleatoriaEnCamino();
-  const posicionPiedra = generarPosicionAleatoriaEnCamino();
-  const posicionPlacasolar = generarPosicionAleatoriaEnCamino();
+  imagenPalo.src= "/images/objetos/paloPixelart.png";
+  imagenPiedra.src= "/images/objetos/piedraPixelart.png";
+  imagenPlacasolar.src= "/images/objetos/placaSolar.png";
 
-  // Asignar las posiciones a los objetos
-  imagenPalo.style.left = `${posicionPalo.ObjetoPosX}px`;
-  imagenPalo.style.top = `${posicionPalo.ObjetoPosY}px`;
+ imagenPalo = generarPosicionRandomObjetos();
 
-  imagenPiedra.style.left = `${posicionPiedra.ObjetoPosX}px`;
-  imagenPiedra.style.top = `${posicionPiedra.ObjetoPosY}px`;
-
-  imagenPlacasolar.style.left = `${posicionPlacasolar.ObjetoPosX}px`;
-  imagenPlacasolar.style.top = `${posicionPlacasolar.ObjetoPosY}px`;
-
- 
 }
-
-// Función para comprobar si el personaje y los objetos están dentro del camino
-// function comprobarPersonajeDentroCamino() {
-//   // ... (resto de tu código)
-
-//   // Verificar si el personaje está dentro del camino (como lo tienes actualmente)
-
-//   // Verificar si los objetos están dentro del camino
-//   const objetos = document.getElementById('objetos').children;
-//   for (const objeto of objetos) {
-//     const objetoLeft = parseInt(objeto.style.left);
-//     const objetoTop = parseInt(objeto.style.top);
-
-//     const objetoColumna = Math.floor(objetoLeft / 100);
-//     const objetoFila = Math.floor(objetoTop / 80);
-
-//     const objetoIsBlocked = arrayCamino[objetoFila][objetoColumna] === 0;
-
-//     if (objetoIsBlocked) {
-//       // Si algún objeto no está dentro del camino, vuelve a generar posiciones
-//       spawnObjetos();
-//       return;
-//     }
-//   }
-
-//   // Resto del código...
-// }
-
 
 
 function movimientoPersonaje() {
@@ -226,6 +157,7 @@ function movimientoPersonaje() {
 }
 
 function popupFuncion(resultado) {
+  juegoEnCurso = false;
   // Mostrar el pop-up
   const popup = document.getElementById('popup');
   popup.style.display = 'block';
@@ -286,27 +218,6 @@ function comprobarPersonajeDentroCamino() {
   const bottomRightIsBlocked = arrayCamino[bottomRightRow][bottomRightColumn] === 0;
 
 
-          // Verificar si los objetos están dentro del camino
-          const objetos = document.getElementById('objetos').children;
-          for (const objeto of objetos) {
-            const objetoLeft = parseInt(objeto.style.left);
-            const objetoTop = parseInt(objeto.style.top);
-
-            const objetoColumna = Math.floor(objetoLeft / 100);
-            const objetoFila = Math.floor(objetoTop / 80);
-
-            const objetoIsBlocked = arrayCamino[objetoFila][objetoColumna] === 0;
-
-            if (objetoIsBlocked) {
-              // Si algún objeto no está dentro del camino, vuelve a generar posiciones
-              spawnObjetos();
-              return;
-            }
-          }
-
-
-
-
 
   if (topLeftIsBlocked || topRightIsBlocked || bottomLeftIsBlocked || bottomRightIsBlocked) {
     clearInterval(intervalId);
@@ -327,57 +238,4 @@ function comprobarPersonajeDentroCamino() {
     "cuadrante 1= [" + topLeftColumn + ", " + topLeftRow + "]    cuadrante 2= [" + topRightColumn + ", " + topRightRow + "]    cuadrante 3= [" + bottomLeftColumn + ", " + bottomLeftRow + "]    cuadrante 4= [" + bottomRightColumn + ", " + bottomRightRow + "]";
 }
 
-// function actualizarVidas() {
-  
-//   document.getElementById('vidas').innerHTML = "VIDAS: " + vidas ;
-//   perder();
-// }
-
-// https://safeimagekit.com/   para pasar las imagenes a pixelart
-
-// function comprobarCamino() {
-//   // Calcula las coordenadas en la matriz
-//   const columna = Math.floor((leftPos - 10) / 100); //math.floor redondea el número
-//   const fila = Math.floor((topPos - 10) / 80);
-
-//   // // Verifica si la posición actual en la matriz es 1 (camino válido)
-//   if (arrayCamino[fila][columna] === 0) {
-//     // no es una posición válida, detén el movimiento
-//     clearInterval(intervalId);
-//     intervalId = setInterval(() => {
-//       personaje.style.top = (topPos + 10) + 'px';
-//       clearInterval(intervalId);
-//     },100);
-
-//   }
-//   // printea posición del personaje
-//   document.getElementById('cuadrante').innerHTML = "cuadrante = [" + columna + ", " + fila + "]";
-// }
-// function actualizarVidas(){
-//   vidas = 3;
-// }
-
-//DENTRO DE FUNCIÓN COMPROBAR CAMINO
-//para saber por consola por donde se está saliendo.
-// if (topLeftIsBlocked) {
-//   // Personaje está saliendo por la esquina superior izquierda.
-//   console.log("Personaje está saliendo por la esquina superior izquierda");
-// }
-
-// if (topRightIsBlocked) {
-//   // Personaje está saliendo por la esquina superior derecha.
-//   console.log("Personaje está saliendo por la esquina superior derecha");
-// }
-
-// if (bottomLeftIsBlocked) {
-//   // Personaje está saliendo por la esquina inferior izquierda.
-//   console.log("Personaje está saliendo por la esquina inferior izquierda");
-// }
-
-// if (bottomRightIsBlocked) {
-//   // Personaje está saliendo por la esquina inferior derecha.
-//   console.log("Personaje está saliendo por la esquina inferior derecha");
-// }
-
-
-
+ 

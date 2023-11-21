@@ -19,6 +19,7 @@ body {
   position: relative;
 
 }
+
 .camino {
   height: 80px;
   width: 100px;
@@ -28,26 +29,30 @@ body {
   position: absolute;
 }
 
-#objetos{
+#objetos {
   position: absolute;
+  align-items: center;
+  left: 12%;
+  top: 40%;
   z-index: 2;
-  }
-  
+}
+
 #personaje {
   width: 40px;
   height: 40px;
   background-size: cover;
   position: absolute;
   z-index: 3;
- 
+
 }
+
 #vidas {
   top: 4%;
   left: 340px;
   display: flex;
   align-items: center;
   position: absolute;
-  
+
   z-index: 4;
 }
 
@@ -56,7 +61,8 @@ body {
 .heart {
   width: 35px;
   height: 35px;
-  margin-right: 5px; /* Agrega un margen entre los corazones */
+  margin-right: 5px;
+  /* Agrega un margen entre los corazones */
 }
 
 
@@ -67,6 +73,7 @@ body {
   position: absolute;
 
 }
+
 #cuadrante {
   top: 115%;
   left: 10%;
@@ -83,7 +90,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 999; 
+  z-index: 999;
 }
 
 .popup-content {
