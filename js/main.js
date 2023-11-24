@@ -12,7 +12,7 @@ let randomY;
 const imagenPersonaje = document.getElementById('imagenPersonaje');
 
 crearMapa();
-
+//generarPosicionRandomObjetos();
 actualizarPosicionPersonaje();
 actualizarVidas();
 //spawnObjetos();
@@ -107,12 +107,23 @@ function movimiento(direction, step) {
   }, 50); //PONER A 50 LUEGO
 }
 
-function generarPosicionRandomObjetos(){
- randomX = Math.floor((Math.random() * 800));
- randomY = Math.floor((Math.random() * 640));
+// function generarPosicionRandomObjetos(){
+//  randomX = Math.floor((Math.random() * 800));
+//  randomY = Math.floor((Math.random() * 640));
+//   console.log(randomX);
+//   console.log(randomY);
+ 
+//   const ObjetoWidth = personaje.offsetWidth;
+//   const ObjetoHeight = personaje.offsetHeight;
+//   const ObjetoLeftTop = leftPos;
+//   const ObjetoLeftBottom = topPos;
+//   const ObjetoRightTop = leftPos + personajeWidth;
+//   const ObjetoRightBottom = topPos + personajeHeight;
 
- return {randomX, randomY}
-}
+
+
+
+// }
 
 //funcion para hacer aparecer los objetos en sitios random
 //funcion para comprobar que estan dentro de la array / si no volver a generar
@@ -128,6 +139,23 @@ function spawnObjetos(){
   imagenPlacasolar.src= "/images/objetos/placaSolar.png";
 
  imagenPalo = generarPosicionRandomObjetos();
+
+ //PRUEBAS
+ randomX = Math.floor((Math.random() * 800));
+ randomY = Math.floor((Math.random() * 640));
+  console.log(randomX);
+  console.log(randomY);
+ 
+  const objetoWidth = imagenPalo.offsetWidth;
+  const objetoHeight = imagenPalo.offsetHeight;
+  const objetoLeftTop = randomX;
+  const objetoLeftBottom = randomY;
+  const objetoRightTop = randomX + objetoWidth;
+  const objetoRightBottom = randomY + objetoHeight;
+
+
+
+
 
 }
 
