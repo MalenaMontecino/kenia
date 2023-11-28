@@ -1,4 +1,3 @@
-
 let game = document.getElementById('game');
 let personaje = document.getElementById('personaje');
 let leftPos = 630;
@@ -113,29 +112,18 @@ function movimiento(direction, step) {
 }
 
 
-
-
 function spawnObjeto(imagenSrc) {
-  // Declarar un conjunto para mantener registro de las posiciones ocupadas
-const posicionesOcupadas = new Set() ;
   const imagenObjeto = document.createElement('img');
   imagenObjeto.src = imagenSrc;
 
-  let intentos = 0;
-  let maxIntentos = 50; // Puedes ajustar el número máximo de intentos según tus necesidades
+  let posicionValida = false;
 
-  while (intentos < maxIntentos) {
+  while (!posicionValida) {
     const { objetoLeft, objetoTop } = generarPosicionAleatoria();
 
-    // Crear una cadena única que represente la posición actual
-    const posicionActual = `${objetoLeft}-${objetoTop}`;
-
-    // Verificar si la posición ya está ocupada
-    if (!posicionesOcupadas.has(posicionActual) && 
-        !verificarEsquinasEnCamino(objetoLeft, objetoTop, imagenObjeto)) {
-      
-      // Agregar la posición actual al conjunto de posiciones ocupadas
-      posicionesOcupadas.add(posicionActual);
+    if (!verificarEsquinasEnCamino(objetoLeft, objetoTop, imagenObjeto)) {
+      // Si la posición es válida, salir del bucle
+      posicionValida = true;
 
       const contenedorImagen = document.createElement('div');
       contenedorImagen.style.position = 'absolute';
@@ -144,17 +132,11 @@ const posicionesOcupadas = new Set() ;
       contenedorImagen.style.top = objetoTop + 'px';
       contenedorImagen.appendChild(imagenObjeto);
       game.appendChild(contenedorImagen);
-
-      // Rompe el bucle while si se generó una posición válida
-      break;
     }
-
-    intentos++;
   }
 }
 
-
-function generarPosicionAleatoria() { 
+function generarPosicionAleatoria() {
   const randomX = Math.floor(Math.random() * 8);
   const randomY = Math.floor(Math.random() * 8);
   const objetoLeft = randomY * 100;
@@ -185,7 +167,7 @@ function verificarEsquinasEnCamino(objetoLeft, objetoTop, imagenObjeto) {
 }
 
 
-  
+
  
 function movimientoPersonaje() {
   document.addEventListener('keydown', (event) => {
