@@ -19,6 +19,17 @@ body {
   position: relative;
 
 }
+#malik{
+  position: absolute;
+  left: 73%;
+  top: 20%;
+}
+#malikTexto{
+  position: absolute;
+  left: 73%;
+  top: 15%;
+  
+}
 
 .camino {
   height: 80px;
